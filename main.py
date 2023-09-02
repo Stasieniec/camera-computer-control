@@ -9,9 +9,6 @@ import os
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 
-base_options = python.BaseOptions(model_asset_path='hand_landmarker.task')
-options = vision.GestureRecognizerOptions(base_options=base_options)
-recognizer = vision.GestureRecognizer.create_from_options(options)
 
 cap = cv2.VideoCapture(0)
 
@@ -31,10 +28,6 @@ with mp_hands.Hands(min_detection_confidence = 0.8, min_tracking_confidence = 0.
         if results.multi_hand_landmarks:
             for num, hand in enumerate(results.multi_hand_landmarks):
                 mp_drawing.draw_landmarks(image, hand, mp_hands.HAND_CONNECTIONS)
-            
-            recognition_result = recognizer.recognize(image)
-            top_gesture = recognition_result.gestures[0][0]
-            print(top_gesture)
 
 
 
